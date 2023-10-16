@@ -1,0 +1,26 @@
+name: Bandit Scan
+
+on:
+  push:
+    branches:
+      - main  # Adjust to the branch you want to trigger the scan on
+
+jobs:
+  security_scan:
+    name: Run Bandit Scan
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Checks out your repository code
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x  # Specify the Python version you need
+
+    - name: Install Bandit
+      run: pip install bandit
+
+    - name: Run Bandit Scan
+      run: bandit -r .  # Scan all Python files in the repository
