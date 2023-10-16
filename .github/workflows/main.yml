@@ -59,6 +59,8 @@ jobs:
         # chmod +x dependency-check/bin/dependency-check.sh
 
         # Run OWASP Dependency Check and generate JSON report
+        ls -l
+        cd dependency-check
         ./bin/dependency-check.sh --scan . --format JSON --out sca-reports.json          
 
     - name: Upload OWASP Dependency Check JSON report
