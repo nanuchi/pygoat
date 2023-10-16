@@ -3,7 +3,7 @@ name: Bandit Scan
 on:
   push:
     branches:
-      - main  # Adjust to the branch you want to trigger the scan on
+      - master  # Adjust to the branch you want to trigger the scan on
 
 jobs:
   security_scan:
