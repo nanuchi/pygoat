@@ -23,7 +23,7 @@ jobs:
     - name: Run OWASP Dependency Check
       run: |
         pip install safety
-        safety check -r requirements.txt --output json > sca_report.json
+        safety check --output json > sca_report.json -r requirements.txt 
         ls
         pwd
 
