@@ -23,9 +23,7 @@ jobs:
     - name: Run OWASP Dependency Check
       run: |
         pip install safety
-        safety check
-        ls
-        pwd
+        safety check --full-report --output json -r requirements.txt > sca_report.json
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
