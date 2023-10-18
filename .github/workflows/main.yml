@@ -25,4 +25,9 @@ jobs:
         pip install safety
         safety check -r requirements.txt --output json > insecure_report.json
 
-  
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: safety-check-findings
+        path: sca-reports.json
