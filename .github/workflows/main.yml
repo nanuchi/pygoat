@@ -23,6 +23,6 @@ jobs:
     - name: Run OWASP Dependency Check
       run: |
         pip install safety
-        safety check -r requirements.txt
+        safety check -r requirements.txt --output json > insecure_report.json
 
   
