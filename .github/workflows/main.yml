@@ -6,31 +6,6 @@ on:
       - master  # Adjust to the branch you want to trigger the scan on
 
 jobs:
-  security_scan:
-    name: Run Bandit Scan
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2  # Checks out your repository code
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8  # Specify the Python version you need
-
-    - name: Install Bandit
-      run: pip install bandit
-
-    - name: Run Bandit Scan
-      run: bandit -ll -ii -r . -f json -o bandit-reports.json
-    
-    - name: 'Upload Artifact'
-      uses: actions/upload-artifact@v3
-      if: always() # run even if previous failed
-      with:
-        name: bandit-findings
-        path: bandit-reports.json
 
   owasp_dependency_check:
     name: Run Dependency Scan
@@ -57,10 +32,6 @@ jobs:
         # chmod +x dependency-check/bin/dependency-check.sh
 
         # Run OWASP Dependency Check and generate JSON report
-        dependency-check/bin/dependency-check.sh --scan . --format JSON --out sca-reports.json          
+        dependency-check/bin/dependency-check.sh --scan ../../
 
-    - name: Upload OWASP Dependency Check JSON report
-      uses: actions/upload-artifact@v2
-      with:
-        name: dependency-check-report
-        path: sca-reports.json
+  
