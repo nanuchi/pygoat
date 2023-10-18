@@ -48,22 +48,20 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-
     - name: Run OWASP Dependency Check
       run: |
         # Install OWASP Dependency Check
         
-        VERSION=$(curl -s https://jeremylong.github.io/DependencyCheck/current.txt)
+				VERSION=$(curl -s https://jeremylong.github.io/DependencyCheck/current.txt)
         curl -Ls "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" --output dependency-check.zip
         unzip dependency-check.zip
         # chmod +x dependency-check/bin/dependency-check.sh
 
         # Run OWASP Dependency Check and generate JSON report
-        cd dependency-check
-        ./bin/dependency-check.sh --scan . --format JSON --out sca-reports.json          
+        dependency-check/bin/dependency-check.sh --scan . --format JSON --out sca-reports.json          
 
     - name: Upload OWASP Dependency Check JSON report
       uses: actions/upload-artifact@v2
       with:
         name: dependency-check-report
-        path: dependency-check/sca-reports.json
+        path: sca-reports.json
