@@ -24,6 +24,8 @@ jobs:
       run: |
         pip install safety
         safety check -r requirements.txt --output json > sca_report.json
+        ls
+        pwd
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
