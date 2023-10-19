@@ -27,6 +27,7 @@ jobs:
           command: quickview, cves
           dockerhub-user: ${{ secrets.REPO_USER }}
           dockerhub-password: ${{ secrets.REPO_PWD }}
-          only-severities: critical,high
+          only-severities: critical, high
+          sarif-file: scout-report.sarif
           
         
