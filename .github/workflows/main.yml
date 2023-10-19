@@ -30,4 +30,5 @@ jobs:
           only-severities: critical, high
           sarif-file: scout-report.sarif
           
+          
         
