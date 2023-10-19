@@ -27,6 +27,6 @@ jobs:
           command: quickview, cves
           dockerhub-user: ${{ secrets.REPO_USER }}
           dockerhub-password: ${{ secrets.REPO_PWD }}
-          only-severities: critical
+          only-severities: critical,high
           
         
