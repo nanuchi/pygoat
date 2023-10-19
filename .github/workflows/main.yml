@@ -29,6 +29,11 @@ jobs:
           dockerhub-password: ${{ secrets.REPO_PWD }}
           only-severities: critical, high
           sarif-file: scout-report.sarif
-          
+
+      - name: Upload Scout Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: scout-report
+          path: scout-report.sarif
           
         
