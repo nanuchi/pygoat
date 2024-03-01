@@ -1,30 +1,15 @@
-name: CI
-
-on: [push]
-
+name: Postar agradecimento
+on:
+  pull_request:
+    types: [opened]
+permissions:
+  pull-requests: write
 jobs:
- sast_scan:
-   name: Run CodeQL Scan
-   runs-on: ubuntu-latest
-   timeout-minutes: 360
-   permissions:
-      security-events: write
-
-   strategy:
-     fail-fast: false
-     matrix:
-       language: [ 'python' ]
-
-   steps:
-   - name: Checkout repository
-     uses: actions/checkout@v4
-
-   - name: Initialize CodeQL
-     uses: github/codeql-action/init@v3
-     with:
-       languages: ${{ matrix.language }}
-
-   - name: Perform CodeQL Analysis
-     uses: github/codeql-action/analyze@v3
-     with:
-       category: "/language:${{matrix.language}}"
+  build:
+    name: Agradecer ao contribuidor
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh pr comment $PR_URL --body "Obrigado por contribuir!"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
