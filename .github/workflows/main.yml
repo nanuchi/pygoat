@@ -4,20 +4,27 @@ on: [push]
 
 jobs:
  sast_scan:
-   name: Run Bandit Scan
+   name: Run CodeQL Scan
    runs-on: ubuntu-latest
+   timeout-minutes: 360
+   permissions:
+      security-events: write
+
+   strategy:
+     fail-fast: false
+     matrix:
+       language: [ 'python' ]
 
    steps:
-   - name: Checkout code
-     uses: actions/checkout@v2
+   - name: Checkout repository
+     uses: actions/checkout@v4
 
-   - name: Set up Python
-     uses: actions/setup-python@v2
+   - name: Initialize CodeQL
+     uses: github/codeql-action/init@v3
      with:
-       python-version: 3.8
+       languages: ${{ matrix.language }}
 
-   - name: Install Bandit
-     run: pip install bandit
-
-   - name: Run Bandit Scan
-     run: bandit -ll -ii -r .
+   - name: Perform CodeQL Analysis
+     uses: github/codeql-action/analyze@v3
+     with:
+       category: "/language:${{matrix.language}}"
