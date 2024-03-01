@@ -3,8 +3,8 @@ name: CI
 on: [push]
 
 jobs:
- codeql_analysis:
-   name: CodeQL
+ sast_scan:
+   name: Run Bandit Scan
    runs-on: ubuntu-latest
 
    steps:
@@ -16,8 +16,8 @@ jobs:
      with:
        python-version: 3.8
 
-   - name: Init CodeQL
-     uses: github/codeql-action/init@v2
+   - name: Install Bandit
+     run: pip install bandit
 
-   - name: Exec CodeQL Analysis
-     run: github/codeql-action/analyze@v2
+   - name: Run Bandit Scan
+     run: bandit -ll -ii -r .
