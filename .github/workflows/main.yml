@@ -17,7 +17,7 @@ jobs:
        python-version: 3.8
 
    - name: Init CodeQL
-     uses: github/codeql-action/init@v1
+     uses: github/codeql-action/init@v2
 
    - name: Exec CodeQL Analysis
-     run: github/codeql-action/analyze@v1
+     run: github/codeql-action/analyze@v2
