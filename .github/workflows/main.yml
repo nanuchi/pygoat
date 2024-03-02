@@ -44,8 +44,13 @@ jobs:
  dependency-scan:
    runs-on: ubuntu-latest
    steps:
-     - name: Veracode Dependency Scanning
-       uses: veracode/veracode-sca@v2.1.11
+     - name: Dependency Scanning
+       uses: actions/dependency-review-action@v4.1.3
        with:
-         github_token: ${{ github.token }}
-         create-issues: true
+         fail-on-severity: high
+         fail-on-scopes: runtime
+         vulnerability-check: true
+         license-check: true
+         
+         
+         
