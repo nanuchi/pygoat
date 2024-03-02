@@ -40,3 +40,13 @@ jobs:
          target: 'http://testphp.vulnweb.com/'
          rules_file_name: '.zap/rules.tsv'
          cmd_options: '-a'
+         
+ dependency-scan:
+   runs-on: ubuntu-latest
+   steps:
+   - name: Checkout Code
+     uses: actions/checkout@v4
+   - name: Run Dependency Check
+     uses: jeremylong/DependencyCheck-Action@v6
+
+    
