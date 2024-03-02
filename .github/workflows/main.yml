@@ -44,9 +44,8 @@ jobs:
  dependency-scan:
    runs-on: ubuntu-latest
    steps:
-   - name: Checkout Code
-     uses: actions/checkout@v4
-   - name: Run Dependency Check
-     uses: jeremylong/DependencyCheck-Action@v6
-
-    
+     - name: Veracode Dependency Scanning
+       uses: veracode/veracode-sca@v2.1.11
+       with:
+         github_token: ${{ github.token }}
+         create-issues: true
